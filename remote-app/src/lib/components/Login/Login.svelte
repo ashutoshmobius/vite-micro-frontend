@@ -1,8 +1,8 @@
 <script lang="ts">
-    export let title = "Login Component";
+    // export let title = "Login Component";
 </script>
 
-<h2>{title}</h2>
+<h2>Login Component</h2>
 
 <style>
 h2 {

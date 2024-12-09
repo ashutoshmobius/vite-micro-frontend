@@ -1,3 +1,40 @@
+
+
+<script lang="ts">
+  import { onMount } from "svelte";
+  let LoginComponent:any;
+  let PaymentComponent:any;
+
+  // Dynamically import the Login component
+  onMount(async () => {
+    const module = await import('remote_app/Login');
+    LoginComponent = module.default; // Access the default export
+
+    // const pModule = await import('payment_app/Payment');
+    // PaymentComponent = pModule.default; // Access the default export
+    console.log("Payment component", LoginComponent);
+  });
+</script>
+
+<main>
+  <h1>Host App</h1>
+  {#if LoginComponent}
+    <LoginComponent  />
+  {/if} 
+  <!-- {#if PaymentComponent}
+    <PaymentComponent />
+  {/if} -->
+
+  
+</main>
+
+<style>
+  h1 {
+    color: blue;
+  }
+</style>
+
+
 <!-- <script lang="ts">
 	// import Login from './../../remote-app/src/lib/components/Login/Login.svelte';
   import svelteLogo from './assets/svelte.svg'
@@ -49,38 +86,4 @@
   }
 </style> -->
 
-
-<script lang="ts">
-  import { onMount } from "svelte";
-  let LoginComponent:any;
-  let PaymentComponent:any;
-
-  // Dynamically import the Login component
-  onMount(async () => {
-    const module = await import('remote_app/Login');
-    LoginComponent = module.default; // Access the default export
-
-    const pModule = await import('payment_app/Payment');
-    PaymentComponent = pModule.default; // Access the default export
-    console.log("Payment component", LoginComponent);
-  });
-</script>
-
-<main>
-  <h1>Host App</h1>
-  <!-- {#if LoginComponent}
-    <LoginComponent title="Login from Remote" />
-  {/if} -->
-  {#if LoginComponent}
-    <PaymentComponent />
-  {/if}
-
-  
-</main>
-
-<style>
-  h1 {
-    color: blue;
-  }
-</style>
 
