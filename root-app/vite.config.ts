@@ -1,16 +1,18 @@
 import { defineConfig } from 'vite'
-import { svelte } from '@sveltejs/vite-plugin-svelte'
+import react from '@vitejs/plugin-react'
 import federation  from '@originjs/vite-plugin-federation'
+// import { svelte } from '@sveltejs/vite-plugin-svelte';
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
-    svelte(),
+    react(),
+    // svelte(),
     federation({
       name: 'host-app',
       remotes:{
-        'remote_app': "http://localhost:5001/assets/remoteEntry.js", //svelte app
-        // 'payment_app': "http://localhost:5002/assets/remoteEntry.js" //react app
+        'remote_app': "http://localhost:5001/assets/remoteEntry.js",
+        'payment_app': "http://localhost:5002/assets/remoteEntry.js"
 
       },
       shared: {
@@ -18,12 +20,12 @@ export default defineConfig({
           version: '^5.2.7', // Match the Svelte version in both apps
           requiredVersion: '^5.2.7',
         },
-        // react: {
-        //   version: '^18.3.1', // Match React version used in `payment` app
-        // },
-        // 'react-dom': {
-        //   version: '^18.3.1', // Match React DOM version
-        // },
+        react: {
+          version: '^18.3.1', // Match React version used in `login` app
+        },
+        'react-dom': {
+          version: '^18.3.1', // Match React DOM version
+        },
       }
       // shared:['svelte']
     })
@@ -34,6 +36,7 @@ export default defineConfig({
     cssCodeSplit: true, // Ensure CSS is split for optimization
   },
   server: {
-    port: 5000
+    port: 5003
   }
 })
+
